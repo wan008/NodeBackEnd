@@ -2,19 +2,22 @@
 
 // Module
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
 
-const PORT = 3000;
+//const PORT = 3000;
 
-// Routing
+// Routing - Controller
 const home = require("./src/routes/home");
 
 // App Setting
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
 
-console.log(`${__dirname}`);
+//console.log(`${__dirname}`);
 app.use(express.static(`${__dirname}/src/public`));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use("/", home); // use -> method to register middle ware
 
