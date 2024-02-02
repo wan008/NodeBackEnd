@@ -24,5 +24,18 @@ function login() {
         },
         body:JSON.stringify(req)
     })
-
+    .then((res) => res.json())
+    .then((res) => {
+        if (res.success) {
+            location.href = "/";
+        } else {
+            alert(res.msg);
+        }
+    })
+    //.then(console.log);
+    // same ==> .then((res) => console.log(res));
+    .catch((err) => {
+        // same ==> console.error(new Error("Error in login process"));
+        console.error("Error in login process");
+    });
 }
