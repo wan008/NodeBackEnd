@@ -1,75 +1,97 @@
 "use strict";
 
-const User = require("../../models/User");
 //const UserStorage = require("../../models/UserStorage");
+const User = require("../../models/User");
 
-/* V1.1 Upgrade */
 const output = {
-    home: (req,res) => {
-        res.render("/home/index");
+    home: (req, res) => {
+        res.render("home/index");
     },
-    
-    login: (req,res) => {
-        res.render("/home/login");
+    login: (req, res) => {
+        res.render("home/login");
+    },
+    register: (req, res) => {
+        res.render("home/register");
     },
 }
 
+
 const process = {
+
     login: (req, res) => {
-        console.log(req);
         const user = new User(req.body);
         const response = user.login();
-        console.log(response);
-        return res.json(resonse);
-    }
-}
+       //console.log(response);
+        return res.json(response);
+    },
+    register: (req, res) => {
+        const user = new User(req.body);
+        const response = user.register();
+       //console.log(response);
+        return res.json(response);
+    },
 
-/*
-const process = {
+
+    ///login: (req, res) => {
+    ///    const user = new User(req.body);
+    ///    const response = user.login();
+    ///    //console.log(response);
+    ///    return res.json(response);
+
+        /*
+        //console.log(req.body);
+        const id = req.body.id,
+            psword = req.body.psword;        
+
+        //const userStorage = new UserStorage();  for declare static users in UserStorage class
+        //console.log(userStorage.users);
+
+        //console.log(UserStorage.users); // for declare static users in UserStorage class
+
+        //console.log(UserStorage.getUsers("psword", "name"));
+
+        const users = UserStorage.getUsers("id", "psword");
+        const response = {};
+        if (users.id.includes(id)) {
+            const idx = users.id.lastIndexOf(id);
+            if (users.psword[idx] === psword) {
+                response.success = true;
+                return res.json(response);
+            }
+        }
+        
+        response.success = false;
+        response.msg = "Login failed";
+        return res.json(response);
+        */
+
+    ///}
+    
+
+    /*
     login: (req, res) => {
         //console.log(req.body);
         const id = req.body.id,
             psword = req.body.psword;
-        
-        // for not static ==> const UserStorage = new UserStorage();
-        console.log(UserStorage.getUsers("id", "psword"));
-        const users = UserStorage.getUsers("id", "psword");
 
+        //console.log(id, psword);
         const response = {};
         if (users.id.includes(id)) {
-            const idx = users.id.indexOf(id);
+            const idx = users.id.lastIndexOf(id);
             if (users.psword[idx] === psword) {
-                response.sucess = true;
+                response.success = true;
                 return res.json(response);
             }
         }
-
-        response.success = false;
-        response.msg = "Login failed in login process";
-        return res.json(response);
         
+        response.success = false;
+        response.msg = "Login failed";
+        return res.json(response);
     }
+    */
 }
-*/
 
 module.exports = {
-    output,     // output: output
-    process,    // process: process
-};
-
-
-/* V1.0 initial
-//function hello(req,res) { }
-const home = (req,res) => {
-    res.render("home/index");
-};
-
-const login = (req,res) => {
-    res.render("home/login");
-};
-
-module.exports = {
-    home,
-    login,
+    output,
+    process,
 }
-*/

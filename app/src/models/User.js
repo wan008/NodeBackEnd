@@ -8,19 +8,25 @@ class User {
     }
 
     login() {
-        //const users = UserStorage.getUsers("id", "psword");
-        //const {id, psword} = UserStorage.getUsers("id", "psword");
-        const body = this.body;
-        const {id, psword} = UserStorage.getUserInfo(body.id);
-        console.log(id, psword);
-        if (id) {
-            if (id === body.id && psword === body.psword) {
-                return {success:true};
+        const client = this.body;
+        const {id, psword} = UserStorage.getUserInfo(client.id);
+        //console.log(id, psword);
+
+        if (id){
+            if (id === client.id && psword === client.psword) {
+                return { success: true};
             }
-            return { success: false, msg: "password mismatched"};
-        }
-        return{ success: false, msg: "ID is not exist"};        
+            return { success: false, msg: "password is wrong"};
+        } 
+        return { success: false, msg: "Id is not exist"};  
     }
+
+    register() {
+        const client = this.body;
+        const response = UserStorage.save(client);
+        return response;
+    }
+
 }
 
 module.exports = User;

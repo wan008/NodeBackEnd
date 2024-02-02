@@ -1,24 +1,31 @@
-"use restrict";
 
-// Module
-const express = require("express");
-const bodyParser = require("body-parser");
+
+/*const express = require("express");
 const app = express();
 
-//const PORT = 3000;
+app.get("/", (req,res) => {
+    res.send("this is root");
+});
 
-// Routing - Controller
-const home = require("./src/routes/home");
+app.get("/login", (req,res) => {
+    res.send("this is login");
+});
 
-// App Setting
-app.set("views", "./src/views");
-app.set("view engine", "ejs");
+app.listen(3000, function() {
+    console.log("Server is started");
+});
+*/
 
-//console.log(`${__dirname}`);
-app.use(express.static(`${__dirname}/src/public`));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+const http = require("http");
+const app = http.createServer( (req,res) => {
+    res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
+    if (req.url === "/" ) {
+        res.end("This is root");
+    } else if (req.url === "/login") {
+        res.end("This is login");
+    }
+});
 
-app.use("/", home); // use -> method to register middle ware
-
-module.exports = app;
+app.listen(3001, () => {
+    console.log("Server http is started");
+});

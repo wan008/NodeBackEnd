@@ -3,21 +3,27 @@
 //console.log("hello");
 
 const id = document.querySelector("#id"),
+    name = document.querySelector("#name"),
     psword = document.querySelector("#psword"),
-    loginBtn = document.querySelector("#button");
+    confirmPsword = document.querySelector("#confirm-psword"),
+    registerBtn = document.querySelector("#button");
 
-loginBtn.addEventListener("click", login);
+registerBtn.addEventListener("click", register);
 
-function login() {
-    console.log(id.value);
+function register() {
+    //console.log(id.value);
     const req = {
         id: id.value,
+        name: name.value,
         psword: psword.value,
+        confirmPsword: confirmPsword.value,
     }
+    //console.log(req);
+
     
     //console.log(id.value);
-    console.log(req, JSON.stringify(req));
-     fetch("/login", {
+    //console.log(req, JSON.stringify(req));
+     fetch("/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -28,15 +34,16 @@ function login() {
      //.then(console.log);        // then((res) => console.log(res))
      .then((res) => {
         if (res.success) {
-            location.href = "/";
+            location.href = "/login";
         } else {
             alert(res.msg);
         }
      })
      .catch((err) => {
-        //console.error(new Error("Error in login process"));
-        console.error("Error in login process - 2");
+        //console.error(new Error("Error in register process"));
+        console.error("Error in register process - 2");
      });
+     
 
 }
 
