@@ -17,7 +17,7 @@ function login() {
     
     //console.log(id.value);
     console.log(req, JSON.stringify(req));
-     fetch("/login", {
+     fetch("http://192.168.1.201:3000/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
